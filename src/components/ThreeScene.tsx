@@ -6,7 +6,7 @@ import * as THREE from 'three';
 
 // Simplified animated floating sphere component
 const AnimatedSphere = ({ position, color, scale = 1 }) => {
-  const meshRef = useRef();
+  const meshRef = useRef<THREE.Mesh>(null);
   
   useEffect(() => {
     if (!meshRef.current) return;

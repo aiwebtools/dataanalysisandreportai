@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Database, BarChart3, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -32,10 +33,12 @@ const Header = () => {
             <BarChart3 className="h-5 w-5 text-cyber-purple absolute -top-1 -right-1" />
           </div>
           <div>
-            <h1 className="text-lg font-bold">
-              <span className="cyber-text">Data Analysis & Report AI</span>
-            </h1>
-            <p className="text-xs opacity-70">Presented by AiWebTools.Ai</p>
+            <a href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+              <h1 className="text-lg font-bold">
+                <span className="cyber-text">Data Analysis & Report AI</span>
+              </h1>
+              <p className="text-xs opacity-70">Presented by AiWebTools.Ai</p>
+            </a>
           </div>
         </div>
 
