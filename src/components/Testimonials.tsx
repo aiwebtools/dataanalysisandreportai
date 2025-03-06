@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star, Quote } from 'lucide-react';
 
@@ -9,28 +8,28 @@ const Testimonials = () => {
       author: "Sarah Johnson",
       role: "Data Scientist, TechNova Inc.",
       rating: 5,
-      image: "/testimonial-1.jpg"
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=150&h=150"
     },
     {
       content: "I was skeptical about AI data analysis tools, but this exceeded my expectations. It handled our complex datasets effortlessly and provided actionable recommendations.",
       author: "Michael Chen",
       role: "Research Director, GlobalResearch",
       rating: 4,
-      image: "/testimonial-2.jpg"
+      image: "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?auto=format&fit=crop&w=150&h=150"
     },
     {
       content: "The multi-format data processing is a game-changer. We can now analyze our spreadsheets, charts, and text reports simultaneously for better business insights.",
       author: "Emily Rodriguez",
       role: "Business Intelligence Manager",
       rating: 3,
-      image: "/testimonial-3.jpg"
+      image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=150&h=150"
     },
     {
       content: "As a non-technical user, I found this AI incredibly easy to use. The comprehensive reports are detailed yet understandable, making data-driven decisions simpler.",
       author: "David Patel",
       role: "Marketing Director, InnovateCorp",
       rating: 4,
-      image: "/testimonial-4.jpg"
+      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=150&h=150"
     }
   ];
 
@@ -61,11 +60,12 @@ const Testimonials = () => {
               <p className="text-gray-200 mb-6 relative z-10">{testimonial.content}</p>
               
               <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full overflow-hidden mr-3">
+                <div className="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-800">
                   <img 
                     src={testimonial.image} 
                     alt={`${testimonial.author} portrait`}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <div>
