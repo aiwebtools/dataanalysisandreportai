@@ -59,10 +59,11 @@ const Testimonials = () => {
     setActiveIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
   };
 
+  // Updated the swipeable configuration to use the correct properties
   const handlers = useSwipeable({
     onSwipedLeft: nextTestimonial,
     onSwipedRight: prevTestimonial,
-    preventDefaultTouchmoveEvent: true,
+    preventScrollOnSwipe: true,
     trackMouse: false
   });
 
