@@ -39,7 +39,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-cyber-green/20 border border-cyber.green/30 text-sm text-cyber-green mb-4">
-            <Star className="h-4 w-4 mr-2 text-cyber-yellow" /> Testimonials
+            <Star className="h-4 w-4 mr-2 text-amber-400" /> Testimonials
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             What Our <span className="cyber-text text-shadow">Users Say</span>
@@ -74,7 +74,7 @@ const Testimonials = () => {
                 </div>
                 <div className="ml-auto flex">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-cyber-yellow fill-cyber-yellow" />
+                    <Star key={i} className="h-4 w-4 text-amber-400 fill-amber-400" />
                   ))}
                   {[...Array(5 - testimonial.rating)].map((_, i) => (
                     <Star key={i + testimonial.rating} className="h-4 w-4 text-gray-600" />
