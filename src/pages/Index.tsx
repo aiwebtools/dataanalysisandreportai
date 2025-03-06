@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
@@ -8,7 +8,10 @@ import HowItWorks from '../components/HowItWorks';
 import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
 import Disclaimer from '../components/Disclaimer';
-import ThreeScene from '../components/ThreeScene';
+import { lazy } from 'react';
+
+// Lazy load the 3D scene to improve initial loading performance
+const ThreeScene = lazy(() => import('../components/ThreeScene'));
 
 const Index = () => {
   useEffect(() => {
@@ -32,14 +35,18 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-cyber-black text-white overflow-hidden">
-      <ThreeScene />
+      <Suspense fallback={<div className="fixed inset-0 -z-10 bg-cyber-black" />}>
+        <ThreeScene />
+      </Suspense>
       <Header />
-      <Hero />
-      <Features />
-      <HowItWorks />
-      <Testimonials />
-      <FAQ />
-      <Disclaimer />
+      <main>
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <Testimonials />
+        <FAQ />
+        <Disclaimer />
+      </main>
       <Footer />
     </div>
   );
