@@ -44,7 +44,7 @@ const Hero = () => {
               </div>
               <div className="flex items-center bg-cyber-dark/70 border border-cyber-purple/20 rounded-lg px-4 py-2">
                 <Trophy className="h-5 w-5 text-cyber-yellow mr-2" />
-                <span className="text-white font-medium">#8 in OpenAI GPT Store</span>
+                <span className="text-white font-medium">#8 in the world</span>
               </div>
               <div className="flex items-center bg-cyber-dark/70 border border-cyber-purple/20 rounded-lg px-4 py-2">
                 <Star className="h-5 w-5 text-cyber-yellow mr-2" />
