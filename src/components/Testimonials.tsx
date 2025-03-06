@@ -15,14 +15,14 @@ const Testimonials = () => {
       content: "I was skeptical about AI data analysis tools, but this exceeded my expectations. It handled our complex datasets effortlessly and provided actionable recommendations.",
       author: "Michael Chen",
       role: "Research Director, GlobalResearch",
-      rating: 5,
+      rating: 4,
       image: "/testimonial-2.jpg"
     },
     {
       content: "The multi-format data processing is a game-changer. We can now analyze our spreadsheets, charts, and text reports simultaneously for better business insights.",
       author: "Emily Rodriguez",
       role: "Business Intelligence Manager",
-      rating: 5,
+      rating: 3,
       image: "/testimonial-3.jpg"
     },
     {
