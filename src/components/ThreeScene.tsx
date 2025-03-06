@@ -1,8 +1,56 @@
 
-import React, { useRef, useEffect, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
+
+// Stars component to create a starfield background
+const Stars = ({ count = 1000 }) => {
+  const positions = useMemo(() => {
+    const positions = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const i3 = i * 3;
+      // Generate stars in a sphere around the camera
+      const radius = Math.random() * 40 + 10;
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos(Math.random() * 2 - 1);
+      
+      positions[i3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      positions[i3 + 2] = radius * Math.cos(phi);
+    }
+    return positions;
+  }, [count]);
+
+  const starsRef = useRef<THREE.Points>(null);
+  
+  useFrame(({ clock }) => {
+    if (starsRef.current) {
+      // Add subtle rotation to stars
+      starsRef.current.rotation.y = clock.getElapsedTime() * 0.02;
+    }
+  });
+
+  return (
+    <points ref={starsRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          array={positions}
+          count={count}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.15}
+        color="#ffffff"
+        sizeAttenuation
+        transparent
+        depthWrite={false}
+      />
+    </points>
+  );
+};
 
 // Simplified animated floating sphere component
 const AnimatedSphere = ({ position, color, scale = 1 }) => {
@@ -87,6 +135,9 @@ const ThreeScene = () => {
       className="!fixed inset-0 -z-10"
       dpr={[0.5, 1]} // Reduced DPR for better performance
     >
+      <color attach="background" args={["#0a0a0f"]} />
+      <Stars count={1500} />
+      
       <ambientLight intensity={0.3} />
       <pointLight position={[5, 5, 5]} intensity={0.5} color="#8B5CF6" />
       
