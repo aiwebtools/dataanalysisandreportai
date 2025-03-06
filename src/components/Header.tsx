@@ -1,148 +1,92 @@
-
 import React, { useState, useEffect } from 'react';
-import { Database, BarChart3, FileAnalytics, Search } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Database, BarChart3, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 768); // Adjust breakpoint as needed
     };
 
-    window.addEventListener('scroll', handleScroll);
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', checkScreenSize);
     };
   }, []);
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'py-3 bg-cyber-black/90 backdrop-blur-lg shadow-lg' 
-          : 'py-5 bg-transparent'
-      }`}
-    >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center gap-2">
+    <header className="bg-cyber-dark py-4 fixed top-0 left-0 w-full z-30 border-b border-cyber-purple/20">
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        <div className="flex items-center space-x-2">
           <div className="relative">
-            <Database className="h-8 w-8 text-cyber-blue animate-pulse-glow" />
+            <Database className="h-8 w-8 text-cyber-blue" />
             <BarChart3 className="h-5 w-5 text-cyber-purple absolute -top-1 -right-1" />
           </div>
           <div>
-            <h1 className="text-lg md:text-xl font-bold leading-none">
+            <h1 className="text-lg font-bold">
               <span className="cyber-text">Data Analysis & Report AI</span>
-              <span className="text-xs block opacity-70 mt-0.5">Presented by AiWebTools.Ai</span>
             </h1>
+            <p className="text-xs opacity-70">Presented by AiWebTools.Ai</p>
           </div>
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          <a 
-            href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-white hover:text-cyber-purple transition-colors px-4 py-2 rounded-full border border-cyber-purple/30 hover:border-cyber-purple/80 hover:shadow-neon"
-          >
-            USE Data Analysis & Report AI🌍
-          </a>
-          <a 
-            href="#faq" 
-            className="text-white hover:text-cyber-blue transition-colors"
-          >
-            FAQ
-          </a>
-          <a 
-            href="#disclaimer" 
-            className="text-white hover:text-cyber-blue transition-colors"
-          >
-            Disclaimer
-          </a>
-          <a 
-            href="https://www.aiwebtools.ai" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-white hover:text-cyber-blue transition-colors"
-          >
-            More AI Tools
-          </a>
-        </nav>
-
-        {/* Mobile menu button */}
-        <button 
-          className="md:hidden flex items-center"
-          onClick={toggleMobileMenu}
-          aria-label="Toggle menu"
-        >
-          <svg
-            className="w-6 h-6 text-white"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            {mobileMenuOpen ? (
-              <path d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-4 pt-2 pb-4 space-y-4 bg-cyber-dark/90 backdrop-blur-lg">
-            <a 
-              href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai" 
-              target="_blank" 
+        {isSmallScreen ? (
+          <button onClick={toggleMenu} className="text-white focus:outline-none">
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        ) : (
+          <nav className="space-x-6">
+            <a href="#features" className="text-gray-300 hover:text-cyber-blue transition-colors">Features</a>
+            <a href="#how-it-works" className="text-gray-300 hover:text-cyber-blue transition-colors">How It Works</a>
+            <a href="#testimonials" className="text-gray-300 hover:text-cyber-blue transition-colors">Testimonials</a>
+            <a href="#faq" className="text-gray-300 hover:text-cyber-blue transition-colors">FAQ</a>
+            <a
+              href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai"
+              target="_blank"
               rel="noopener noreferrer"
-              className="block py-2 text-center text-white bg-gradient-to-r from-cyber-blue to-cyber-purple rounded-md"
-              onClick={() => setMobileMenuOpen(false)}
+              className="inline-flex items-center justify-center py-2 px-4 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white rounded-md hover:shadow-neon transition-all"
             >
               USE Data Analysis & Report AI🌍
             </a>
-            <a 
-              href="#faq" 
-              className="block py-2 text-white"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              FAQ
-            </a>
-            <a 
-              href="#disclaimer" 
-              className="block py-2 text-white"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Disclaimer
-            </a>
-            <a 
-              href="https://www.aiwebtools.ai" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="block py-2 text-white"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              More AI Tools
-            </a>
-          </div>
-        </div>
-      )}
+          </nav>
+        )}
+      </div>
+
+      <AnimatePresence>
+        {isMenuOpen && isSmallScreen && (
+          <motion.div
+            className="bg-cyber-dark absolute top-full left-0 w-full py-4 px-6 border-b border-cyber-purple/20"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <nav className="flex flex-col space-y-4">
+              <a href="#features" className="text-gray-300 hover:text-cyber-blue transition-colors block py-2">Features</a>
+              <a href="#how-it-works" className="text-gray-300 hover:text-cyber-blue transition-colors block py-2">How It Works</a>
+              <a href="#testimonials" className="text-gray-300 hover:text-cyber-blue transition-colors block py-2">Testimonials</a>
+              <a href="#faq" className="text-gray-300 hover:text-cyber-blue transition-colors block py-2">FAQ</a>
+              <a
+                href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center py-2 px-4 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white rounded-md hover:shadow-neon transition-all"
+              >
+                USE Data Analysis & Report AI🌍
+              </a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

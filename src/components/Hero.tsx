@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Database, BarChart3, ArrowRight } from 'lucide-react';
+import { Database, BarChart3, ArrowRight, Users, Star, Trophy } from 'lucide-react';
 
 const Hero = () => {
   const videoRef = useRef<HTMLIFrameElement>(null);
@@ -36,6 +36,21 @@ const Hero = () => {
             <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-lg">
               Your unparalleled AI assistant for comprehensive data analysis, image interpretation, and insightful reporting with strategic recommendations.
             </p>
+            
+            <div className="flex flex-wrap gap-4 mb-8">
+              <div className="flex items-center bg-cyber-dark/70 border border-cyber-purple/20 rounded-lg px-4 py-2">
+                <Users className="h-5 w-5 text-cyber-blue mr-2" />
+                <span className="text-white font-medium">250K+ Users Worldwide</span>
+              </div>
+              <div className="flex items-center bg-cyber-dark/70 border border-cyber-purple/20 rounded-lg px-4 py-2">
+                <Trophy className="h-5 w-5 text-cyber-yellow mr-2" />
+                <span className="text-white font-medium">#8 in OpenAI GPT Store</span>
+              </div>
+              <div className="flex items-center bg-cyber-dark/70 border border-cyber-purple/20 rounded-lg px-4 py-2">
+                <Star className="h-5 w-5 text-cyber-yellow mr-2" />
+                <span className="text-white font-medium">4.6 Star Rating</span>
+              </div>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
