@@ -10,11 +10,14 @@ import FAQ from '../components/FAQ';
 import Disclaimer from '../components/Disclaimer';
 import { lazy } from 'react';
 
-// Lazy load the 3D scene with error boundary handling
-const ThreeScene = lazy(() => import('../components/ThreeScene').catch(() => {
-  console.error("Failed to load ThreeScene component");
-  return { default: () => null };
-}));
+// Lazy load the 3D scene with better error handling
+const ThreeScene = lazy(() => import('../components/ThreeScene').then(
+  module => ({ default: module.default }),
+  error => {
+    console.error("Failed to load ThreeScene component:", error);
+    return { default: () => null };
+  }
+));
 
 const Index = () => {
   const [sceneLoaded, setSceneLoaded] = useState(false);
@@ -35,40 +38,44 @@ const Index = () => {
       });
     });
 
-    // Set page title
-    document.title = "Data Analysis & Report AI | Advanced Data Analytics";
+    // Set initial background in case 3D scene fails to load
+    document.body.classList.add('bg-cyber-black');
 
-    // Add fallback in case ThreeScene fails to load
+    // Shorter fallback timer to improve UX if scene fails
     const timer = setTimeout(() => {
       if (!sceneLoaded) {
         setSceneError(true);
+        console.log("ThreeScene fallback timer triggered");
       }
-    }, 3000);
+    }, 2000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      document.body.classList.remove('bg-cyber-black');
+    };
   }, [sceneLoaded]);
 
   const handleSceneLoad = () => {
     setSceneLoaded(true);
+    console.log("ThreeScene loaded successfully");
   };
 
   const handleSceneError = () => {
     setSceneError(true);
+    console.error("ThreeScene failed to load or render");
   };
 
   return (
     <div className="min-h-screen bg-cyber-black text-white overflow-hidden">
+      {/* Fallback background if ThreeScene fails or is still loading */}
+      <div className="fixed inset-0 -z-10 bg-cyber-black bg-gradient-to-br from-cyber-dark via-cyber-black to-black" />
+      
       {!sceneError && (
-        <Suspense fallback={<div className="fixed inset-0 -z-10 bg-cyber-black" />}>
+        <Suspense fallback={null}>
           <div onLoad={handleSceneLoad} onError={handleSceneError}>
             <ThreeScene />
           </div>
         </Suspense>
-      )}
-      
-      {/* Fallback background gradient if ThreeScene fails */}
-      {sceneError && (
-        <div className="fixed inset-0 -z-10 bg-cyber-black bg-gradient-to-br from-cyber-dark via-cyber-black to-black" />
       )}
       
       <Header />

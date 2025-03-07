@@ -4,7 +4,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Stars component to create a starfield background
+// Simplified Stars component with better performance
 const Stars = ({ count = 1000 }) => {
   const positions = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -22,12 +22,12 @@ const Stars = ({ count = 1000 }) => {
     return positions;
   }, [count]);
 
-  const starsRef = useRef<THREE.Points>(null);
+  const starsRef = useRef(null);
   
   useFrame(({ clock }) => {
     if (starsRef.current) {
-      // Add subtle rotation to stars
-      starsRef.current.rotation.y = clock.getElapsedTime() * 0.02;
+      // Simpler rotation to avoid performance issues
+      starsRef.current.rotation.y = clock.getElapsedTime() * 0.01;
     }
   });
 
@@ -42,7 +42,7 @@ const Stars = ({ count = 1000 }) => {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.15}
+        size={0.1}
         color="#ffffff"
         sizeAttenuation
         transparent
@@ -52,26 +52,17 @@ const Stars = ({ count = 1000 }) => {
   );
 };
 
-// Simplified animated floating sphere component
+// Simplified AnimatedSphere with error handling
 const AnimatedSphere = ({ position, color, scale = 1 }) => {
-  const meshRef = useRef<THREE.Mesh>(null);
+  const meshRef = useRef(null);
   
-  useEffect(() => {
-    if (!meshRef.current) return;
-    
-    const animate = () => {
-      if (!meshRef.current) return;
-      
-      // Simple rotation
-      meshRef.current.rotation.x += 0.003;
-      meshRef.current.rotation.y += 0.002;
-      
-      requestAnimationFrame(animate);
-    };
-    
-    const animationId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationId);
-  }, []);
+  useFrame(() => {
+    if (meshRef.current) {
+      // Simple rotation with lower values to avoid performance issues
+      meshRef.current.rotation.x += 0.001;
+      meshRef.current.rotation.y += 0.001;
+    }
+  });
 
   return (
     <Sphere ref={meshRef} args={[scale, 8, 8]} position={position}>
@@ -84,10 +75,12 @@ const AnimatedSphere = ({ position, color, scale = 1 }) => {
   );
 };
 
-// Simplified background component
+// Simplified GridLines with better performance
 const GridLines = () => {
+  const gridRef = useRef(null);
+  
   return (
-    <group>
+    <group ref={gridRef}>
       {Array.from({ length: 5 }, (_, i) => (
         <line key={`h-${i}`}>
           <bufferGeometry>
@@ -98,7 +91,7 @@ const GridLines = () => {
               itemSize={3}
             />
           </bufferGeometry>
-          <lineBasicMaterial color="#3d245b" opacity={0.2} transparent />
+          <lineBasicMaterial color="#3d245b" opacity={0.1} transparent />
         </line>
       ))}
       
@@ -112,7 +105,7 @@ const GridLines = () => {
               itemSize={3}
             />
           </bufferGeometry>
-          <lineBasicMaterial color="#3d245b" opacity={0.2} transparent />
+          <lineBasicMaterial color="#3d245b" opacity={0.1} transparent />
         </line>
       ))}
     </group>
@@ -123,37 +116,56 @@ const ThreeScene = () => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Safely mount the component
     setMounted(true);
-    return () => setMounted(false);
+    
+    // Cleanup function
+    return () => {
+      setMounted(false);
+    };
   }, []);
 
+  // Don't render anything if not mounted to avoid hydration issues
   if (!mounted) return null;
 
   return (
-    <Canvas
-      camera={{ position: [0, 0, 5], fov: 45 }}
-      className="!fixed inset-0 -z-10"
-      dpr={[0.5, 1]} // Reduced DPR for better performance
-    >
-      <color attach="background" args={["#0a0a0f"]} />
-      <Stars count={1500} />
-      
-      <ambientLight intensity={0.3} />
-      <pointLight position={[5, 5, 5]} intensity={0.5} color="#8B5CF6" />
-      
-      <GridLines />
-      
-      <AnimatedSphere position={[-2, 1, -2]} color="#8B5CF6" scale={0.8} />
-      <AnimatedSphere position={[2, -1, -1]} color="#0ea5e9" scale={0.6} />
-      
-      <OrbitControls 
-        enableZoom={false} 
-        enablePan={false} 
-        rotateSpeed={0.2} 
-        autoRotate 
-        autoRotateSpeed={0.1} 
-      />
-    </Canvas>
+    <div className="fixed inset-0 -z-10 bg-gradient-to-br from-cyber-dark via-cyber-black to-black">
+      <Canvas
+        camera={{ position: [0, 0, 5], fov: 45 }}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+        dpr={[0.4, 0.8]} // Lower DPR for even better performance
+        gl={{ 
+          antialias: false,
+          powerPreference: 'low-power', 
+          failIfMajorPerformanceCaveat: true 
+        }}
+      >
+        <color attach="background" args={["#0a0a0f"]} />
+        <fog attach="fog" args={["#0a0a0f", 15, 30]} />
+        
+        {/* Reduced star count for better performance */}
+        <Stars count={800} />
+        
+        <ambientLight intensity={0.2} />
+        <pointLight position={[5, 5, 5]} intensity={0.3} color="#8B5CF6" />
+        
+        <GridLines />
+        
+        {/* Only two animated spheres for better performance */}
+        <AnimatedSphere position={[-2, 1, -2]} color="#8B5CF6" scale={0.5} />
+        <AnimatedSphere position={[2, -1, -1]} color="#0ea5e9" scale={0.3} />
+        
+        <OrbitControls 
+          enableZoom={false} 
+          enablePan={false} 
+          rotateSpeed={0.1} 
+          autoRotate 
+          autoRotateSpeed={0.5}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 3}
+        />
+      </Canvas>
+    </div>
   );
 };
 
