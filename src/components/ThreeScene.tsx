@@ -1,17 +1,17 @@
 
 import React, { useRef, useEffect, useState, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Sphere } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Simplified Stars component with better performance
-const Stars = ({ count = 1000 }) => {
+const Stars = ({ count = 800 }) => {
   const positions = useMemo(() => {
     const positions = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
       // Generate stars in a sphere around the camera
-      const radius = Math.random() * 40 + 10;
+      const radius = Math.random() * 30 + 10;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(Math.random() * 2 - 1);
       
@@ -26,8 +26,8 @@ const Stars = ({ count = 1000 }) => {
   
   useFrame(({ clock }) => {
     if (starsRef.current) {
-      // Simpler rotation to avoid performance issues
-      starsRef.current.rotation.y = clock.getElapsedTime() * 0.01;
+      // Very slow rotation to avoid performance issues
+      starsRef.current.rotation.y = clock.getElapsedTime() * 0.005;
     }
   });
 
@@ -52,30 +52,7 @@ const Stars = ({ count = 1000 }) => {
   );
 };
 
-// Simplified AnimatedSphere with error handling
-const AnimatedSphere = ({ position, color, scale = 1 }) => {
-  const meshRef = useRef(null);
-  
-  useFrame(() => {
-    if (meshRef.current) {
-      // Simple rotation with lower values to avoid performance issues
-      meshRef.current.rotation.x += 0.001;
-      meshRef.current.rotation.y += 0.001;
-    }
-  });
-
-  return (
-    <Sphere ref={meshRef} args={[scale, 8, 8]} position={position}>
-      <meshStandardMaterial 
-        color={color} 
-        roughness={0.2} 
-        metalness={0.8} 
-      />
-    </Sphere>
-  );
-};
-
-// Simplified GridLines with better performance
+// Simplified Grid Lines with better performance
 const GridLines = () => {
   const gridRef = useRef(null);
   
@@ -133,34 +110,37 @@ const ThreeScene = () => {
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-        dpr={[0.4, 0.8]} // Lower DPR for even better performance
+        dpr={[0.4, 0.8]} // Lower DPR for better performance
         gl={{ 
           antialias: false,
           powerPreference: 'low-power', 
-          failIfMajorPerformanceCaveat: true 
+          failIfMajorPerformanceCaveat: true,
+          alpha: true,
+          stencil: false,
+          depth: false,
+          preserveDrawingBuffer: false
+        }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(new THREE.Color('#0a0a0f'), 1);
         }}
       >
         <color attach="background" args={["#0a0a0f"]} />
         <fog attach="fog" args={["#0a0a0f", 15, 30]} />
         
         {/* Reduced star count for better performance */}
-        <Stars count={800} />
+        <Stars count={600} />
         
         <ambientLight intensity={0.2} />
         <pointLight position={[5, 5, 5]} intensity={0.3} color="#8B5CF6" />
         
         <GridLines />
         
-        {/* Only two animated spheres for better performance */}
-        <AnimatedSphere position={[-2, 1, -2]} color="#8B5CF6" scale={0.5} />
-        <AnimatedSphere position={[2, -1, -1]} color="#0ea5e9" scale={0.3} />
-        
         <OrbitControls 
           enableZoom={false} 
           enablePan={false} 
-          rotateSpeed={0.1} 
+          rotateSpeed={0.05} 
           autoRotate 
-          autoRotateSpeed={0.5}
+          autoRotateSpeed={0.3}
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 3}
         />

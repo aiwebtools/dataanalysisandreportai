@@ -22,6 +22,7 @@ const ThreeScene = lazy(() => import('../components/ThreeScene').then(
 const Index = () => {
   const [sceneLoaded, setSceneLoaded] = useState(false);
   const [sceneError, setSceneError] = useState(false);
+  const [attemptsLeft, setAttemptsLeft] = useState(2); // Allow 2 attempts to load the scene
 
   useEffect(() => {
     // Smooth scroll for anchor links
@@ -38,16 +39,16 @@ const Index = () => {
       });
     });
 
-    // Set initial background in case 3D scene fails to load
+    // Set initial background to ensure visibility
     document.body.classList.add('bg-cyber-black');
 
     // Shorter fallback timer to improve UX if scene fails
     const timer = setTimeout(() => {
       if (!sceneLoaded) {
-        setSceneError(true);
         console.log("ThreeScene fallback timer triggered");
+        setSceneError(true);
       }
-    }, 2000);
+    }, 3000); // Longer timeout to give 3D scene more time to load
 
     return () => {
       clearTimeout(timer);
@@ -61,18 +62,30 @@ const Index = () => {
   };
 
   const handleSceneError = () => {
-    setSceneError(true);
-    console.error("ThreeScene failed to load or render");
+    if (attemptsLeft > 0) {
+      console.log(`ThreeScene failed, attempting reload. Attempts left: ${attemptsLeft}`);
+      setAttemptsLeft(attemptsLeft - 1);
+      // Force remount of ThreeScene by toggling sceneError state
+      setSceneError(true);
+      setTimeout(() => setSceneError(false), 100);
+    } else {
+      console.error("ThreeScene failed to load after multiple attempts");
+      setSceneError(true);
+    }
   };
 
   return (
     <div className="min-h-screen bg-cyber-black text-white overflow-hidden">
-      {/* Fallback background if ThreeScene fails or is still loading */}
+      {/* Robust fallback background */}
       <div className="fixed inset-0 -z-10 bg-cyber-black bg-gradient-to-br from-cyber-dark via-cyber-black to-black" />
       
       {!sceneError && (
         <Suspense fallback={null}>
-          <div onLoad={handleSceneLoad} onError={handleSceneError}>
+          <div 
+            className="scene-container" 
+            onLoad={handleSceneLoad} 
+            onError={handleSceneError}
+          >
             <ThreeScene />
           </div>
         </Suspense>
