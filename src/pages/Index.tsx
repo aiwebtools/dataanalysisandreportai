@@ -58,7 +58,7 @@ const Index = () => {
     // If rendering doesn't start within a few seconds, show the fallback
     const fallbackTimer = setTimeout(() => {
       if (!document.querySelector('#scene-container canvas')) {
-        handleSceneError();
+        handleSceneError({});  // Pass an empty object to fix the type error
       }
     }, 3000);
 
