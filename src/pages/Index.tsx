@@ -10,12 +10,20 @@ import FAQ from '../components/FAQ';
 import Disclaimer from '../components/Disclaimer';
 import ThreeScene from '../components/ThreeScene';
 import { useToast } from '@/components/ui/use-toast';
+import CookieConsent from '../components/CookieConsent';
 
 const Index = () => {
   const [sceneError, setSceneError] = useState(false);
+  const [showConsent, setShowConsent] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
+    // Check if the user has already accepted the disclaimer
+    const hasAccepted = localStorage.getItem('disclaimerAccepted');
+    if (!hasAccepted) {
+      setShowConsent(true);
+    }
+
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
@@ -61,6 +69,16 @@ const Index = () => {
     };
   }, [toast]);
 
+  const handleAccept = () => {
+    localStorage.setItem('disclaimerAccepted', 'true');
+    setShowConsent(false);
+    toast({
+      title: "Disclaimer Accepted",
+      description: "Thank you for accepting our disclaimer.",
+      duration: 3000,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-cyber-black text-white overflow-hidden">
       {/* Robust fallback background */}
@@ -78,6 +96,8 @@ const Index = () => {
         <Disclaimer />
       </main>
       <Footer />
+      
+      {showConsent && <CookieConsent onAccept={handleAccept} />}
     </div>
   );
 };
