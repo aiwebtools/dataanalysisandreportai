@@ -33,7 +33,7 @@ const Header = () => {
             <BarChart3 className="h-5 w-5 text-cyber-purple absolute -top-1 -right-1" />
           </div>
           <div>
-            <a href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+            <a href="https://chatgpt.com/g/g-6813b4e678588191ae3d1ec530a8bb1a-ultimate-data-image-analysis-ai" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
               <h1 className="text-lg font-bold">
                 <span className="cyber-text">Data Analysis & Report AI</span>
               </h1>
@@ -53,7 +53,7 @@ const Header = () => {
             <a href="#testimonials" className="text-gray-300 hover:text-cyber-blue transition-colors">Testimonials</a>
             <a href="#faq" className="text-gray-300 hover:text-cyber-blue transition-colors">FAQ</a>
             <a
-              href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai"
+              href="https://chatgpt.com/g/g-6813b4e678588191ae3d1ec530a8bb1a-ultimate-data-image-analysis-ai"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center py-2 px-4 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white rounded-md hover:shadow-neon transition-all"
@@ -79,7 +79,7 @@ const Header = () => {
               <a href="#testimonials" className="text-gray-300 hover:text-cyber-blue transition-colors block py-2">Testimonials</a>
               <a href="#faq" className="text-gray-300 hover:text-cyber-blue transition-colors block py-2">FAQ</a>
               <a
-                href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai"
+                href="https://chatgpt.com/g/g-6813b4e678588191ae3d1ec530a8bb1a-ultimate-data-image-analysis-ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center py-2 px-4 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white rounded-md hover:shadow-neon transition-all"

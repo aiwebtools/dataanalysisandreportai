@@ -24,7 +24,7 @@ const Footer = () => {
               Unleashing the power of advanced data analysis through AI innovation.
             </p>
             <a 
-              href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai" 
+              href="https://chatgpt.com/g/g-6813b4e678588191ae3d1ec530a8bb1a-ultimate-data-image-analysis-ai" 
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-block py-2 px-4 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white rounded-md hover:shadow-neon transition-all"

@@ -54,7 +54,7 @@ const Hero = () => {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
-                href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai" 
+                href="https://chatgpt.com/g/g-6813b4e678588191ae3d1ec530a8bb1a-ultimate-data-image-analysis-ai" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center py-3 px-6 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white rounded-lg hover:shadow-neon transition-all"
