@@ -76,8 +76,8 @@ const Hero = () => {
                 ref={videoRef}
                 width="100%"
                 height="315"
-                src="https://www.youtube.com/embed/9moQDqb4qhY?autoplay=1&mute=0&enablejsapi=1&hd=1"
-                title="DATA DATA ANTHEM"
+                src="https://www.youtube.com/embed/idxjOwUAD_I?autoplay=1&mute=0&enablejsapi=1&hd=1"
+                title="Ultimate Data & Image Analysis AI"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="rounded-lg"
