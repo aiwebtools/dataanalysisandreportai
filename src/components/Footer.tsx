@@ -1,10 +1,9 @@
-
 import React from 'react';
 import { Database, BarChart3, Mail, Phone, ChevronRight } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-cyber-dark via-black to-cyber-dark py-16 border-t border-gradient-to-r from-cyber-purple via-cyber-blue to-cyber-pink relative overflow-hidden">
+    <footer className="bg-gradient-to-b from-black via-cyber-black to-black py-16 border-t border-cyber-purple/20 relative overflow-hidden">
       {/* Animated background effects */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyber-purple rounded-full mix-blend-multiply filter blur-xl animate-pulse-slow"></div>
@@ -33,8 +32,8 @@ const Footer = () => {
           <div className="space-y-6">
             <div className="flex items-center gap-3 group">
               <div className="relative">
-                <Database className="h-10 w-10 text-cyber-blue group-hover:text-cyber-purple transition-all duration-500" />
-                <BarChart3 className="h-6 w-6 text-cyber-purple group-hover:text-cyber-blue absolute -top-2 -right-2 transition-all duration-500" />
+                <Database className="h-10 w-10 text-black group-hover:text-cyber-purple transition-all duration-500" />
+                <BarChart3 className="h-6 w-6 text-black group-hover:text-cyber-blue absolute -top-2 -right-2 transition-all duration-500" />
                 <div className="absolute inset-0 bg-cyber-blue/20 rounded-full blur-lg animate-pulse"></div>
               </div>
               <div>
