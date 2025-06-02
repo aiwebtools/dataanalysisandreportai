@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -72,11 +71,6 @@ const Index = () => {
   const handleAccept = () => {
     localStorage.setItem('disclaimerAccepted', 'true');
     setShowConsent(false);
-    toast({
-      title: "Disclaimer Accepted",
-      description: "Thank you for accepting our disclaimer.",
-      duration: 3000,
-    });
   };
 
   return (
