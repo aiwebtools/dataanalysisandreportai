@@ -32,18 +32,20 @@
 
 @layer base {
   * {
-    @apply border-border selection:bg-cyber-purple/20 selection:text-white;
-    transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    @apply border-border selection:bg-cyber-purple/30 selection:text-white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   body {
-    @apply bg-cyber-black text-foreground font-cyber antialiased;
-    background-image: 
-      linear-gradient(to bottom, rgba(139, 92, 246, 0.05), rgba(14, 165, 233, 0.05)),
-      radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.05) 0%, transparent 35%),
-      radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.05) 0%, transparent 35%);
-    background-size: 100% 100%, 100% 100%, 100% 100%;
-    background-repeat: no-repeat;
+    @apply bg-cyber-black text-foreground font-cyber antialiased overflow-x-hidden;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+      linear-gradient(135deg, #0a0a0f 0%, #121218 50%, #0a0a0f 100%);
+    background-attachment: fixed;
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    animation: backgroundShift 20s ease-in-out infinite;
   }
 
   html {
@@ -52,30 +54,93 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-cyber font-bold tracking-tight;
+    text-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
   }
 
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-4xl md:text-5xl lg:text-7xl;
+    line-height: 1.1;
   }
 
   h2 {
-    @apply text-3xl md:text-4xl;
+    @apply text-3xl md:text-4xl lg:text-5xl;
   }
 
   h3 {
-    @apply text-2xl md:text-3xl;
+    @apply text-2xl md:text-3xl lg:text-4xl;
   }
 
   h4 {
-    @apply text-xl md:text-2xl;
+    @apply text-xl md:text-2xl lg:text-3xl;
   }
 
   p {
-    @apply text-base md:text-lg leading-relaxed;
+    @apply text-base md:text-lg lg:text-xl leading-relaxed;
   }
 
   section {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-32 lg:py-40;
+    position: relative;
+  }
+
+  section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+  }
+}
+
+@keyframes backgroundShift {
+  0%, 100% {
+    background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%, 0% 100%, 100% 0%, 25% 25%;
+  }
+  50% {
+    background-position: 100% 100%, 0% 0%, 0% 100%, 50% 50%;
+  }
+  75% {
+    background-position: 0% 100%, 100% 0%, 50% 50%, 75% 75%;
+  }
+}
+
+@keyframes divineGlow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(139, 92, 246, 0.4),
+      0 0 40px rgba(14, 165, 233, 0.3),
+      0 0 60px rgba(236, 72, 153, 0.2),
+      inset 0 0 20px rgba(139, 92, 246, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(139, 92, 246, 0.6),
+      0 0 60px rgba(14, 165, 233, 0.5),
+      0 0 90px rgba(236, 72, 153, 0.4),
+      inset 0 0 30px rgba(139, 92, 246, 0.2);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes levitate {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(1deg);
   }
 }
 
@@ -90,34 +155,47 @@
   }
 
   .glass {
-    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-glass;
+    @apply backdrop-blur-2xl border border-white/20 shadow-2xl;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    box-shadow: 
+      0 8px 32px rgba(139, 92, 246, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   }
   
   .neo-blur {
-    @apply backdrop-blur-xl bg-black/40 border border-white/10;
+    @apply backdrop-blur-2xl border border-white/20;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
   }
   
   .neon-border {
     @apply border border-transparent relative;
-  }
-
-  .neon-border::before {
-    content: "";
-    @apply absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-cyber-blue via-cyber-purple to-cyber-pink -z-10;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
+    background: linear-gradient(45deg, #0a0a0f, #121218) padding-box,
+                linear-gradient(45deg, #8B5CF6, #0ea5e9, #ec4899) border-box;
   }
 
   .cyber-text {
     @apply bg-gradient-to-r from-cyber-blue via-cyber-purple to-cyber-pink inline-block text-transparent bg-clip-text;
+    background-size: 200% 200%;
+    animation: shimmer 3s ease-in-out infinite;
   }
 
   .text-shadow {
-    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    text-shadow: 
+      0 0 10px rgba(139, 92, 246, 0.8),
+      0 0 20px rgba(14, 165, 233, 0.6),
+      0 0 30px rgba(236, 72, 153, 0.4);
   }
 
   .shadow-neon {
-    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+    box-shadow: 
+      0 0 20px rgba(139, 92, 246, 0.6),
+      0 0 40px rgba(14, 165, 233, 0.4),
+      0 0 60px rgba(236, 72, 153, 0.2);
+  }
+
+  .shadow-divine {
+    animation: divineGlow 4s ease-in-out infinite;
   }
 
   .animate-delay-100 {
@@ -139,6 +217,18 @@
   .animate-delay-500 {
     animation-delay: 500ms;
   }
+
+  .animate-levitate {
+    animation: levitate 6s ease-in-out infinite;
+  }
+
+  .container {
+    @apply px-6 md:px-8 lg:px-12;
+  }
+
+  .section-spacing {
+    @apply py-20 md:py-32 lg:py-40;
+  }
 }
 
 #root {
@@ -146,4 +236,68 @@
   margin: 0 auto;
   padding: 0;
   text-align: left;
+}
+
+/* Enhanced animations */
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 
+      0 0 5px rgba(139, 92, 246, 0.5),
+      0 0 10px rgba(139, 92, 246, 0.5),
+      0 0 15px rgba(139, 92, 246, 0.5);
+  }
+  to {
+    text-shadow: 
+      0 0 10px rgba(139, 92, 246, 0.8),
+      0 0 20px rgba(14, 165, 233, 0.8),
+      0 0 30px rgba(236, 72, 153, 0.8),
+      0 0 40px rgba(139, 92, 246, 0.8);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseSlow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
 }
