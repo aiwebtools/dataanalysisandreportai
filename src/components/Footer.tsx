@@ -67,7 +67,7 @@ const Footer = () => {
             <h4 className="text-white font-semibold mb-4">Legal</h4>
             <ul className="space-y-2">
               <li>
-                <a href="https://aiwebtools.ai/terms-of-services" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-cyber-blue transition-colors flex items-center">
+                <a href="https://aiwebtools.lovable.app/disclaimers" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-cyber-blue transition-colors flex items-center">
                   <ChevronRight className="h-4 w-4 mr-1" /> Terms of Service
                 </a>
               </li>

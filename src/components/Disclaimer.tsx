@@ -13,6 +13,9 @@ const Disclaimer = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             <span className="cyber-text text-shadow">Legal</span> Disclaimer
           </h2>
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-cyber-blue/20 border border-cyber-blue/30 text-sm text-cyber-blue mb-4">
+            For informational, educational, and research purposes only
+          </div>
         </div>
 
         <div className="glass rounded-xl p-8 backdrop-blur-lg max-w-4xl mx-auto border border-white/5">
