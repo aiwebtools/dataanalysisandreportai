@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -8,6 +9,7 @@ import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
 import Disclaimer from '../components/Disclaimer';
 import ThreeScene from '../components/ThreeScene';
+import SeoOptimizer from '../components/SeoOptimizer';
 import { useToast } from '@/components/ui/use-toast';
 import CookieConsent from '../components/CookieConsent';
 
@@ -57,7 +59,7 @@ const Index = () => {
     // If rendering doesn't start within a few seconds, show the fallback
     const fallbackTimer = setTimeout(() => {
       if (!document.querySelector('#scene-container canvas')) {
-        handleSceneError({});  // Pass an empty object to fix the type error
+        handleSceneError({});
       }
     }, 3000);
 
@@ -75,13 +77,15 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-cyber-black text-white overflow-hidden">
+      <SeoOptimizer />
+      
       {/* Robust fallback background */}
       <div className="fixed inset-0 -z-10 bg-cyber-black bg-gradient-to-br from-cyber-dark via-cyber-black to-black" />
       
       {!sceneError && <ThreeScene />}
       
       <Header />
-      <main>
+      <main role="main">
         <Hero />
         <Features />
         <HowItWorks />
