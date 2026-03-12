@@ -132,7 +132,7 @@ const Footer = () => {
             
             <div className="mt-8">
               <a 
-                href="https://www.aiwebtools.ai" 
+                href="https://aiwebtools.lovable.app/?via=aiwebtools" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-cyber-purple/30 to-cyber-blue/30 hover:from-cyber-purple/50 hover:to-cyber-blue/50 text-white border border-cyber-purple/50 hover:border-cyber-purple transition-all duration-500 backdrop-blur-md transform hover:scale-105 shadow-lg hover:shadow-neon"
@@ -147,7 +147,7 @@ const Footer = () => {
         <div className="mt-16 pt-8 border-t border-gradient-to-r from-transparent via-cyber-purple/50 to-transparent text-center">
           <p className="text-gray-400 text-sm">
             <a 
-              href="https://www.aiwebtools.ai" 
+              href="https://aiwebtools.lovable.app/?via=aiwebtools" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:text-cyber-blue transition-colors duration-300 bg-gradient-to-r from-cyber-blue to-cyber-purple bg-clip-text hover:text-transparent"
