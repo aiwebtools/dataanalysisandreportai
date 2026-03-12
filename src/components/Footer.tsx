@@ -147,7 +147,7 @@ const Footer = () => {
         <div className="mt-16 pt-8 border-t border-gradient-to-r from-transparent via-cyber-purple/50 to-transparent text-center">
           <p className="text-gray-400 text-sm">
             <a 
-              href="https://www.aiwebtools.ai" 
+              href="https://aiwebtools.lovable.app/?via=aiwebtools" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:text-cyber-blue transition-colors duration-300 bg-gradient-to-r from-cyber-blue to-cyber-purple bg-clip-text hover:text-transparent"
