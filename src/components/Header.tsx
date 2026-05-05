@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Database, BarChart3, Menu, X, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { openExternal } from '@/lib/openLink';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -64,6 +65,7 @@ const Header = () => {
               href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai" 
               target="_blank" 
               rel="noopener noreferrer" 
+              onClick={openExternal('https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai')}
               className="hover:opacity-80 transition-opacity"
               aria-label="Data Analysis & Report AI - Free AI Tools by AIWEBTOOLS.AI"
             >
@@ -92,6 +94,7 @@ const Header = () => {
               href="https://aiwebtools.lovable.app/?via=aiwebtools"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={openExternal('https://aiwebtools.lovable.app/?via=aiwebtools')}
               className="text-sm lg:text-base text-gray-300 hover:text-cyber-blue transition-colors px-2 py-1 rounded-md hover:bg-white/5 whitespace-nowrap"
               aria-label="Discover more free AI tools at AiWebTools.Ai"
             >
@@ -101,6 +104,7 @@ const Header = () => {
               href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={openExternal('https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai')}
               className="inline-flex items-center justify-center py-2 px-4 lg:px-5 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white text-sm lg:text-base rounded-md hover:shadow-neon transition-all whitespace-nowrap flex-shrink-0"
               aria-label="Use our free AI data analysis tool now"
             >
@@ -151,7 +155,7 @@ const Header = () => {
                 href="https://aiwebtools.lovable.app/?via=aiwebtools"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={closeMenu}
+                onClick={(e) => { closeMenu(); openExternal('https://aiwebtools.lovable.app/?via=aiwebtools')(e); }}
                 className="text-gray-300 hover:text-cyber-blue active:text-cyber-blue transition-colors py-3 px-3 rounded-lg hover:bg-white/5 active:bg-white/10 flex items-center justify-between touch-manipulation"
                 aria-label="Discover more free AI tools at AiWebTools.Ai"
               >
@@ -162,7 +166,7 @@ const Header = () => {
                 href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={closeMenu}
+                onClick={(e) => { closeMenu(); openExternal('https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai')(e); }}
                 className="mt-2 inline-flex items-center justify-center py-3 px-4 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white rounded-lg hover:shadow-neon transition-all touch-manipulation active:scale-95"
                 aria-label="Use our free AI data analysis tool now"
               >

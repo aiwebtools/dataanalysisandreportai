@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Upload, Search, BarChart3, FileText } from 'lucide-react';
+import { openExternal } from '@/lib/openLink';
 
 const HowItWorks = () => {
   const steps = [
@@ -72,6 +73,7 @@ const HowItWorks = () => {
             href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai" 
             target="_blank" 
             rel="noopener noreferrer"
+            onClick={openExternal('https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai')}
             className="inline-flex items-center justify-center py-3 px-8 bg-gradient-to-r from-cyber-blue to-cyber-purple text-white rounded-lg hover:shadow-neon transition-all"
           >
             Try It Now

@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Database, BarChart3, ArrowRight, Users, Star, Trophy, Sparkles } from 'lucide-react';
+import { openExternal } from '@/lib/openLink';
 
 const Hero = () => {
   const videoRef = useRef<HTMLIFrameElement>(null);
@@ -97,6 +98,7 @@ const Hero = () => {
                 href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai" 
                 target="_blank" 
                 rel="noopener noreferrer"
+                onClick={openExternal('https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai')}
                 className="group inline-flex items-center justify-center py-4 px-8 bg-gradient-to-r from-cyber-blue via-cyber-purple to-cyber-pink text-white rounded-xl hover:shadow-divine transition-all duration-500 transform hover:scale-105 text-lg font-semibold shadow-neon"
                 aria-label="Start analyzing your data now with our AI tool"
               >

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Database, BarChart3, Mail, Phone, ChevronRight } from 'lucide-react';
+import { openExternal } from '@/lib/openLink';
 
 const Footer = () => {
   return (
@@ -53,6 +54,7 @@ const Footer = () => {
               href="https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai" 
               target="_blank" 
               rel="noopener noreferrer"
+              onClick={openExternal('https://chatgpt.com/g/g-2OebMtWeG-data-analysis-report-ai')}
               className="inline-block py-3 px-6 bg-gradient-to-r from-cyber-blue via-cyber-purple to-cyber-pink text-white rounded-xl hover:shadow-neon transition-all duration-500 transform hover:scale-105 shadow-lg"
             >
               USE Data Analysis & Report AI🌍
@@ -135,6 +137,7 @@ const Footer = () => {
                 href="https://aiwebtools.lovable.app/?via=aiwebtools" 
                 target="_blank" 
                 rel="noopener noreferrer" 
+                onClick={openExternal('https://aiwebtools.lovable.app/?via=aiwebtools')}
                 className="inline-flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-cyber-purple/30 to-cyber-blue/30 hover:from-cyber-purple/50 hover:to-cyber-blue/50 text-white border border-cyber-purple/50 hover:border-cyber-purple transition-all duration-500 backdrop-blur-md transform hover:scale-105 shadow-lg hover:shadow-neon"
               >
                 More AI Tools
